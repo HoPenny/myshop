@@ -148,17 +148,17 @@ Route::get('/storesession', function (Request $request) {
     // $request->session()->put('name', 'Zack');
     // $request->session()->put('msg', 'good');
     // $request->session()->put('price', 1000);
-    // $request->session()->put('data', ['name' => 'Zack', 'msg' => 'good']);
-    $request->session()->flash('status', 'GG');
+    $request->session()->put('data', ['name' => 'Zack', 'msg' => 'good']);
+    // $request->session()->flash('status', 'GG');
 
     return 'stroe session';
 });
 Route::get('/getsession', function (Request $request) {
-    // $data = session('name', 'Doll');
+    $data = session('name', 'Doll');
     // $data = session('msg', 'dd');
     // $data = session()->all();
-    $data = $request->session()->get('status', 'YY');
-    $request->session()->keep(['status']);
+    // $data = $request->session()->get('status', 'YY');
+    // $request->session()->keep(['status']);
     // $request->session()->reflash();
 
     return $data;

@@ -55,6 +55,7 @@
                     <td>
                       <h5>{{__('Subtotal')}}</h5>
                     </td>
+                    @livewire('cart-totle',['item'=>$item])
                     <td>
                       <h5>{{$total}}</h5>
                     </td>
