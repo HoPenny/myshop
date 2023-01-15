@@ -20,10 +20,9 @@
               <div class="product_count">
                 {{-- <button class="" wire:click="minus" > <i class="ti-minus"></i></button> --}}
                 <button wire:click="minus">-</button>
-                <h1>{{$quantity}}</h1>
+                <input class=""  type="text" value="{{$quantity}}"  min="0" max="10">
                 <button wire:click="plus">+</button>
-                {{-- <input class=""  type="text" value="{{$quantity}}"  min="0" max="10">
-                <span class=""  wire:click="plus"> <i class="ti-plus"></i></span> --}}
+                {{-- <span class=""  wire:click="plus"> <i class="ti-plus"></i></span> --}}
               </div>
           </td>
           <td>

@@ -1,7 +1,8 @@
+ @csrf
  <aside class="single_sidebar_widget search_widget">
     <form action="{{url('/search')}}"  method="post">
         <div class="form-group">
-        {{csrf_field()}}
+
           <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder='Search Keyword'
                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'" name='search'>

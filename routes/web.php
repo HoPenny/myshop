@@ -37,8 +37,8 @@ Route::namespace ('App\Http\Controllers')->group(function () {
     Route::post('/blogs', 'SiteController@storeBlog');
     Route::get('/blog', 'SiteController@blog');
     Route::get('/blog-details/{article}', 'SiteController@blog_details');
-    Route::post('/search', 'SiteController@selectBlog');
-    Route::get('/blog', 'SiteController@blog');
+    Route::get('/search', 'SiteController@selectBlog');
+    Route::get('/blog/{cgy}', 'SiteController@blog');
     Route::get('/blog_serch', 'SiteController@blog_serch');
 
     //cart

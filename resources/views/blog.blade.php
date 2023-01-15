@@ -18,7 +18,6 @@
 </div>
 <!--? Hero Area End-->
 <!--================Blog Area =================-->
-@include('flash::message')
 <section class="blog_area section-padding">
     <div class="container">
         <div class="row">
@@ -186,7 +185,7 @@
 
 
                     <aside class="single_sidebar_widget instagram_feeds">
-                        <h4 class="widget_title">Instagram Feeds</h4>
+                        <h4 class="widget_title">{{__('Instagram Feeds')}}</h4>
                         <ul class="instagram_row flex-wrap">
                             <li>
                                 <a href="#">
@@ -223,7 +222,7 @@
 
 
                     <aside class="single_sidebar_widget newsletter_widget">
-                        <h4 class="widget_title">Newsletter</h4>
+                        <h4 class="widget_title">{{__('Newsletter')}}</h4>
 
                         <form action="#">
                             <div class="form-group">
@@ -231,7 +230,8 @@
                                     onblur="this.placeholder = 'Enter email'" placeholder='Enter email' required>
                             </div>
                             <button class="button rounded-0 primary-bg text-white w-100 btn_1 boxed-btn"
-                                type="submit">Subscribe</button>
+                                type="submit">{{__('Subscribe')}}</button>
+
                         </form>
                     </aside>
                 </div>
