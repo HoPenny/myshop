@@ -154,7 +154,7 @@
                         @endforeach
                     </aside> --}}
                     <aside class="single_sidebar_widget tag_cloud_widget">
-                        <h4 class="widget_title">Tag Clouds</h4>
+                        <h4 class="widget_title">{{__('Tag Clouds')}}</h4>
                         <ul class="list">
                             <li>
                                 <a href="#">project</a>

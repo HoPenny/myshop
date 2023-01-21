@@ -17,20 +17,15 @@ class CartTotle extends Component
         'minus' => 'getCartSum',
         'plus' => 'getCartSum',
     ];
-
-    // public function mount($item)
-    // {
-    //     $this->rowId = $item->id;
-    //     $this->price = $item->price;
-    //     $this->quantity = $item->quantity;
-    //     $this->getCartSum();
-
-    // }
+    public function mount()
+    {
+        $this->getCartSum();
+    }
     public function getCartSum()
     {
         $this->total = \Cart::Session(Auth::user()->id)->getTotal();
-        $item = \Cart::Session(Auth::user()->id)->getContent();
-        dd($item);
+        // $item = \Cart::Session(Auth::user()->id)->getContent();
+        // dd($this->total);
 
     }
     public function render()

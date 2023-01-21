@@ -30,10 +30,14 @@ class CartItem extends Component
     public function plus()
     {
         // dd('plus');
-        \Cart::Session(Auth::user()->id)->update($this->rowId, ['quantity' => 1,
-            'attributes' => [],
-            'associatedModel' => $this->item]);
+        \Cart::Session(Auth::user()->id)->update($this->rowId, ['quantity' => 1]);
+        // 'attributes' => [],
+        // 'associatedModel' => $this->item]);
 
+        $this->emit('plus');
+        // $item = \Cart::Session(1)->getContent();
+        // dd($item);
+        // dd($this->total);
         $this->quantity++;
         $this->init();
 
@@ -46,6 +50,7 @@ class CartItem extends Component
             'attributes' => [],
             'associatedModel' => $this->item]);
 
+        $this->emit('minus');
         if ($this->quantity > 0) {
             $this->quantity--;
             $this->init();

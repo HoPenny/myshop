@@ -54,5 +54,17 @@
   "Forgot your password?": "忘記密碼",
   "Log in": "登入",
   "Log Out": "登出",
-  "Instagram Feeds":"社群動態"
+  "Instagram Feeds":"社群動態",
+  "Tag Clouds":"標籤查詢",
+  "Checkout":"結帳頁面",
+  "If you have shopped with us before, please enter your details in the boxes below. If you are a new customer, please proceed to the Billing & Shipping section.":"如果您以前在我們這裡購物過，請在下面的框中輸入您的詳細信息。如果您是新客戶，請前往賬單和運輸部分。",
+  "log in":"登錄",
+  "Lost your password?":"忘記密碼",
+  "Have a coupon?":"有優惠券?",
+  "Click here to enter your code":"輸入優惠碼",
+  "Billing Details":"結帳明細",
+  "Your Order":"你的訂單",
+  "I’ve read and accept the terms & conditions*":"我已閱讀並接受條款和條件",
+  "Proceed to Paypal":"結帳付款"
+
 }

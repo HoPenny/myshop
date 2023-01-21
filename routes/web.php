@@ -47,7 +47,7 @@ Route::namespace ('App\Http\Controllers')->group(function () {
     Route::get('/clearcart', 'SiteController@clearCart');
 
     Route::get('/cart', 'SiteController@cartPage');
-    Route::get('checkout', 'SiteController@checkout');
+    Route::get('/checkout', 'SiteController@checkout');
 });
 // Route::get('/contacts/{contact}', function (Contact $contact) {
 //     dd($contact);
@@ -89,7 +89,7 @@ Route::get("additem", function () {
     $item = Item::find(1);
     \Cart::Session(1)->add([
         'id' => 2,
-        'title' => $item->title,
+        'name' => $item->title,
         'price' => $item->price_new,
         'quantity' => 1,
         'attributes' => [],
@@ -100,16 +100,16 @@ Route::get("additem", function () {
 //更新購物車
 Route::get("clearCart", function () {
     $item = Item::find(1);
-    if (!\Cart::sesstion(1)->ismepty()) {
-        \Cart::Session(1)->update(1, [
-            'quantity' => -2,
-            'attributes' => [],
-            'associatedModel' => $item,
-        ]);
-        return "已加入購物車";
-    } else {
-        return "購物車已清空";
-    }
+    // if (!\Cart::sesstion(1)->ismepty()) {
+    \Cart::Session(1)->update(1, [
+        'quantity' => 1,
+        'attributes' => [],
+        'associatedModel' => $item,
+    ]);
+    return "已加入購物車";
+    // } else {
+    //     return "購物車已清空";
+
 });
 //移除購物車
 Route::get('removeitem', function () {

@@ -10,7 +10,6 @@ use App\Models\Comment;
 use App\Models\Contact;
 use App\Models\Element;
 use App\Models\Item;
-use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,8 +43,9 @@ class SiteController extends Controller
         $shop = Element::where('page', 'index')->where('position', 'shop')->orderBy('sort', 'asc')->get();
         $shop_method = Element::where('page', 'index')->where('position', 'shop_method')->orderBy('sort', 'asc')->get();
         $video = Element::where('page', 'index')->where('position', 'video')->orderBy('sort', 'asc')->first();
+        $img = Element::where('page', 'about')->where('position', 'img')->orderBy('sort', 'asc')->first();
 
-        return view('about', compact('about', 'video', 'shop_method', 'shop'));
+        return view('about', compact('about', 'video', 'shop_method', 'shop', 'img'));
     }
 
     public function cartPage()
@@ -82,18 +82,40 @@ class SiteController extends Controller
     {
         //建立訂單明細
         $carts = \Cart::session(Auth::user()->id)->getContent();
-        $order = Order::create([
-            'owner_id' => 1,
-        ]);
+        // dd($carts);
+        // $order->owner_id = Auth::user()->id;
+        // $order->subtotal = $total;
+        // $order->shipCost = 0;
+        // $order->status = 'Create';
+        // $order->type = 'normal';
+        // $comment1 = Order::create($order->only('subtotal', 'shipCost', 'status', 'type'));
+        // $itemorder->order_id = $comment1->id;
         // foreach ($carts as $cart) {
-        //     OrderItem::create([
-        //         'order_id' => $order->id,
-        //         'item_id' => $cart->id,
-        //         'qty' => $cart->quantity,
-        //     ]);
+        //     $itemorder->item_id = $cart->id;
+        //     $itemorder->qty = $cart->quantity;
+        //     $comment2 = Order::create($itemorder->only('order_id', 'item_id'));
         // }
 
+        // if (isset($comment1) && !empty($comment1)) {
+        //     // print('儲存成功');
+        //     // flash('評論建立完成!!')->overlay(); //跳出視窗
+        //     foreach ($carts as $cart) {
+        //         $itemorder->id = $cart->item;
+        //     }
+        // }
+        // if (isset($comment2) && !empty($comment2)) {
+        //     flash('評論建立完成!!')->overlay();
+        // } else {
+        //     flash('評論建立失敗!!')->error(); //紅色框
+
+        // }
+        return redirect('/checkout');
+
         //串接金流付款
+
+    }
+    public function storeorder(Request $request)
+    {
 
         return redirect('/');
     }
@@ -135,7 +157,6 @@ class SiteController extends Controller
         } else {
             print('儲存失敗');
             flash('聯絡建立失敗!!')->error(); //紅色框
-
         }
         return redirect('/contact');
     }

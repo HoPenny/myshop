@@ -1,5 +1,3 @@
-<div>
-     <td>
+<td>
       <h5>{{$total}}</h5>
-    </td>
-</div>
+</td>

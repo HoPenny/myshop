@@ -5,6 +5,7 @@
           <div class="popular-img">
               <img src="{{  Voyager::image($item->getFirstPic()) }}" alt="">
               <div class="img-cap">
+                 <a href="{{url("/addcart/" . $item->id . '/1')}}">
                   <span>加入購物車</span>
               </div>
               <div class="favorit-items">
