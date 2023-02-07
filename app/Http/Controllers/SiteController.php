@@ -10,7 +10,6 @@ use App\Models\Comment;
 use App\Models\Contact;
 use App\Models\Element;
 use App\Models\Item;
-use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,8 +43,9 @@ class SiteController extends Controller
         $shop = Element::where('page', 'index')->where('position', 'shop')->orderBy('sort', 'asc')->get();
         $shop_method = Element::where('page', 'index')->where('position', 'shop_method')->orderBy('sort', 'asc')->get();
         $video = Element::where('page', 'index')->where('position', 'video')->orderBy('sort', 'asc')->first();
+        $img = Element::where('page', 'about')->where('position', 'img')->orderBy('sort', 'asc')->first();
 
-        return view('about', compact('about', 'video', 'shop_method', 'shop'));
+        return view('about', compact('about', 'video', 'shop_method', 'shop', 'img'));
     }
 
     public function cartPage()
@@ -82,18 +82,40 @@ class SiteController extends Controller
     {
         //建立訂單明細
         $carts = \Cart::session(Auth::user()->id)->getContent();
-        $order = Order::create([
-            'owner_id' => 1,
-        ]);
-        foreach ($carts as $cart) {
-            OrderItem::create([
-                'order_id' => $order->id,
-                'item_id' => $cart->id,
-                'qty' => $cart->quantity,
-            ]);
-        }
+        // dd($carts);
+        // $order->owner_id = Auth::user()->id;
+        // $order->subtotal = $total;
+        // $order->shipCost = 0;
+        // $order->status = 'Create';
+        // $order->type = 'normal';
+        // $comment1 = Order::create($order->only('subtotal', 'shipCost', 'status', 'type'));
+        // $itemorder->order_id = $comment1->id;
+        // foreach ($carts as $cart) {
+        //     $itemorder->item_id = $cart->id;
+        //     $itemorder->qty = $cart->quantity;
+        //     $comment2 = Order::create($itemorder->only('order_id', 'item_id'));
+        // }
+
+        // if (isset($comment1) && !empty($comment1)) {
+        //     // print('儲存成功');
+        //     // flash('評論建立完成!!')->overlay(); //跳出視窗
+        //     foreach ($carts as $cart) {
+        //         $itemorder->id = $cart->item;
+        //     }
+        // }
+        // if (isset($comment2) && !empty($comment2)) {
+        //     flash('評論建立完成!!')->overlay();
+        // } else {
+        //     flash('評論建立失敗!!')->error(); //紅色框
+
+        // }
+        return redirect('/checkout');
 
         //串接金流付款
+
+    }
+    public function storeorder(Request $request)
+    {
 
         return redirect('/');
     }
@@ -128,40 +150,39 @@ class SiteController extends Controller
     public function storeContact(ContactRequest $request)
     {
         $contact = Contact::create($request->only('subject', 'message', 'email', 'name'));
-        if (isset($contact)) {
+        if (isset($contact) || !empty($contact)) {
             print('儲存成功');
             flash('聯絡單建立完成!!')->overlay(); //跳出視窗
 
         } else {
             print('儲存失敗');
             flash('聯絡建立失敗!!')->error(); //紅色框
-
         }
         return redirect('/contact');
     }
     public function selectBlog(Request $request)
     {
-        $article_news = Article::where('title', 'LIKE', '%' . $request->search . '%')->orwhere('content_small', 'LIKE', '%' . $request->search . '%')->orwhere('content', 'LIKE', '%' . $request->search . '%')->get();
-
-        //取得最新消息的文章
         $cgy = Cgy::find(1);
+        $article_news = $cgy->articles()->where('title', 'LIKE', '%' . $request->search . '%')->orwhere('content_small', 'LIKE', '%' . $request->search . '%')->orwhere('content', 'LIKE', '%' . $request->search . '%')->paginate(5);
+
         $cgies = Cgy::get();
         $recents = Article::orderby('created_at', 'desc')->limit(4)->get();
         if ($article_news->count() < 1) {
             $article_news = $cgy->articles()->paginate(5);
             flash('查無相關貼文!!')->overlay();
-            return view('blog', compact('cgy', 'article_news', 'cgies', 'recents'));
-
-        } else {
-            return view('blog_serch', compact('cgy', 'article_news', 'cgies', 'recents'));
         }
+        return view('blog', compact('cgy', 'article_news', 'cgies', 'recents'));
+
+        // } else {
+        //     return view('blog_serch', compact('cgy', 'article_news', 'cgies', 'recents'));
+        // }
 
     }
 
-    public function blog()
+    public function blog($id)
     {
         //取得最新消息的文章
-        $cgy = Cgy::find(1);
+        $cgy = Cgy::find($id);
         $article_news = $cgy->articles()->paginate(5);
         $cgies = Cgy::get();
         $recents = Article::orderby('created_at', 'desc')->limit(4)->get();
@@ -204,8 +225,12 @@ class SiteController extends Controller
 
         if (isset($comment) && !empty($comment)) {
             print('儲存成功');
+            flash('評論建立完成!!')->overlay(); //跳出視窗
+
         } else {
             print('儲存失敗');
+            flash('評論建立失敗!!')->error(); //紅色框
+
         }
         return redirect('/blog-details/' . $request->article_id);
 

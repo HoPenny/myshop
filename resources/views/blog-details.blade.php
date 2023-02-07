@@ -203,6 +203,7 @@
                            <button type="submit" class="button button-contactForm btn_1 boxed-btn">{{__('Send Message')}}</button>
                         </div>
                      </form>
+                     @include('flash::message')
                      @if ($errors->any())
                         <div class="alert alert-danger">
                             <ul>

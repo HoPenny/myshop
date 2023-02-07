@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>{{setting('site.title')}} @yield('title')</title>
+    <title>{{setting('site.title')}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {{-- <link rel="manifest" href="site.webmanifest"> --}}
@@ -41,13 +41,13 @@
     <!-- Preloader Start -->
     <header>
         <!-- Header Start -->
-        {{-- <div class="header-area"> --}}
+        <div class="header-area">
             <div class="main-header header-sticky">
                 <div class="container-fluid">
                     <div class="menu-wrapper">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.html"><img src="{{ asset('storage/'.setting('site.logo')) }}" alt=""></a>
+                            <a href="{{ asset('/') }}"><img src="{{ asset('storage/'.setting('site.logo')) }}" alt=""></a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu d-none d-lg-block">
@@ -73,9 +73,9 @@
                     <div class="col-12">
                         <div class="mobile_menu d-block d-lg-none"></div>
                     </div>
-                {{-- </div> --}}
-            {{-- </div> --}}
-        {{-- </div> --}}
+                </div>
+            </div>
+        </div>
         <!-- Header End -->
     </header>
     <main>
@@ -184,7 +184,7 @@
       <!-- Flash Message Overlay會用到，需保留 -->
       $('#flash-overlay-modal').modal();
       <!-- Flash Message 3秒之後消失，非必須 -->
-      $('div.alert').delay(3000).fadeOut(350);
+      $('div.alert').delay(8000).fadeOut(350);
     </script>
      @livewireScripts
 </body>
